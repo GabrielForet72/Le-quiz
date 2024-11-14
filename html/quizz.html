@@ -34,6 +34,23 @@
         ];
 
         let currentQuestion = 0;
+        let countdown;
+        const countdownDuration = 10;
+
+        function startCountdown(callback) {
+            let timeLeft = countdownDuration;
+            countdown = setInterval(() => {
+                console.log(`Temps restant : ${timeLeft} secondes`);
+                timeLeft--;
+
+                if (timeLeft < 0) {
+                    clearInterval(countdown);
+                    alert("Temps écoulé ! Le quiz est terminé.");
+                    return;
+                }
+            }, 1000);
+            callback();
+        }
 
         function askQuestion() {
             if (currentQuestion >= questions.length) {
