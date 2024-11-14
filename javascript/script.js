@@ -1,52 +1,50 @@
 const questions = [
-    {
-        question: "Quel est le plus grand océan de la Terre ?",
-        answers: ["1) Océan Atlantique", "2) Océan Indien", "3) Océan Pacifique", "4) Océan Arctique"],
-        correct: "3"
-    },
-    {
-        question: "Combien de planètes y a-t-il dans notre système solaire ?",
-        answers: ["1) 7", "2) 8", "3) 9", "4) 10"],
-        correct: "2"
-    },
-    {
-        question: "Quelle est la capitale de l’Australie ?",
-        answers: ["1) Sydney", "2) Melbourne", "3) Canberra", "4) Perth"],
-        correct: "3"
-    },
-    {
-        question: "Quelle est l'année de fondation du groupe préféré de Gabriel ?",
-        answers: ["1) 1962", "2) 1963", "3) 1964", "4) 1965"],
-        correct: "3"
-    }
+    { question: "Quelle est mon année de naissance ?", options: ["1990", "1996", "2000", "1994"], correctAnswer: "2" },
+    { question: "Quel est mon film préféré ?", options: ["Inception", "Forrest Gump", "Gladiator", "Titanic"], correctAnswer: "2" },
+    { question: "Quel est mon opus préféré de GTA ?", options: ["Vice City", "GTA V", "San Andreas", "GTA III"], correctAnswer: "3" },
+    { question: "Quelle est l'année de fondation de mon groupe préféré ?", options: ["1962", "1963", "1964", "1965"], correctAnswer: "3" }
 ];
 
 let currentQuestion = 0;
-let correctAnswers = 0;
+const countdownDuration = 10;
+let countdown;
+let timeLeft;
 
-function startQuiz() {
-    askQuestion(currentQuestion);
+function startCountdown() {
+    timeLeft = countdownDuration;
+    countdown = setInterval(() => {
+        console.log(`Temps restant : ${timeLeft} secondes`);
+        timeLeft--;
+
+        if (timeLeft < 0) {
+            clearInterval(countdown);
+            alert("Temps écoulé ! Le quiz est terminé.");
+            currentQuestion = questions.length; // Termine le quiz
+        }
+    }, 1000);
 }
 
-function askQuestion(index) {
-    if (index >= questions.length) {
-        if (correctAnswers === questions.length) {
-            window.location.href = "index.html";
-        } else {
-            alert("Quiz terminé. Tu n’as pas répondu correctement à toutes les questions.");
-        }
+function askQuestion() {
+    if (currentQuestion >= questions.length) {
+        window.location.href = "index.html";
         return;
     }
 
-    const questionObj = questions[index];
-    const userAnswer = prompt(`${questionObj.question}\n\n${questionObj.answers.join("\n")}`);
+    const questionObj = questions[currentQuestion];
+    const formattedQuestion = `${questionObj.question}\n\n` +
+        questionObj.options.map((option, index) => `${index + 1}) ${option}`).join("\n");
 
-    if (userAnswer === questionObj.correct) {
-        alert("Bonne réponse !");
-        correctAnswers++;
+    startCountdown();
+
+    const userAnswer = prompt(formattedQuestion);
+    clearInterval(countdown);
+
+    if (timeLeft >= 0 && userAnswer === questionObj.correctAnswer) {
         currentQuestion++;
-        askQuestion(currentQuestion); // Appelle la prochaine question
-    } else {
-        alert("Mauvaise réponse. Le quiz est terminé.");
+        askQuestion();
+    } else if (userAnswer !== questionObj.correctAnswer && userAnswer !== null) {
+        alert("Mauvaise réponse ! Le quiz est terminé.");
     }
 }
+
+askQuestion();
