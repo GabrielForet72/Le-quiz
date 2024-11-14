@@ -5,13 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Félicitations !</title>
 
-    <!-- Import de la police stylée depuis Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
 
     <style>
-        /* Style de base */
+        
         body {
             margin: 0;
             display: flex;
@@ -25,7 +24,7 @@
             text-align: center;
         }
 
-        /* Titre avec animation de couleur et rebond */
+        
         h1 {
             font-size: 4em;
             animation: colorChange 3s infinite, bounce 2s infinite;
@@ -33,14 +32,14 @@
             margin-bottom: 20px;
         }
 
-        /* Texte de vanne */
+        
         .roast-text {
             font-size: 1.5em;
             color: #ff69b4;
             animation: roastTextFlash 2s infinite alternate;
         }
 
-        /* Effet de changement de couleur et rebond pour le titre */
+        
         @keyframes colorChange {
             0% { color: #FFD700; }
             25% { color: #FF4500; }
@@ -55,13 +54,13 @@
             60% { transform: translateY(-15px); }
         }
 
-        /* Animation clignotante pour le texte de vanne */
+        
         @keyframes roastTextFlash {
             from { opacity: 0.6; }
             to { opacity: 1; }
         }
 
-        /* Feux d'artifice */
+        
         .firework {
             position: absolute;
             width: 10px;
@@ -77,7 +76,7 @@
             100% { transform: scale(4); opacity: 0; }
         }
 
-        /* Confettis */
+        
         .confetti {
             position: absolute;
             width: 10px;
@@ -93,7 +92,7 @@
             100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
         }
 
-        /* Étoiles scintillantes */
+        
         .star {
             position: absolute;
             width: 5px;
@@ -117,7 +116,6 @@
     </div>
 
     <script>
-        // Fonction pour créer un feu d'artifice coloré
         function createFirework() {
             const firework = document.createElement("div");
             firework.classList.add("firework");
@@ -136,7 +134,6 @@
             }, 1500);
         }
 
-        // Fonction pour créer des confettis
         function createConfetti() {
             const confetti = document.createElement("div");
             confetti.classList.add("confetti");
@@ -151,7 +148,6 @@
             }, 3000);
         }
 
-        // Fonction pour créer une étoile scintillante
         function createStar() {
             const star = document.createElement("div");
             star.classList.add("star");
@@ -166,13 +162,11 @@
             }, 1000);
         }
 
-        // Génère une couleur aléatoire
         function getRandomColor() {
             const colors = ["#FFD700", "#FF4500", "#1E90FF", "#32CD32", "#FF69B4", "#00CED1"];
             return colors[Math.floor(Math.random() * colors.length)];
         }
 
-        // Créer des feux d'artifice, confettis et étoiles scintillantes
         setInterval(createFirework, 300);
         setInterval(createConfetti, 200);
         setInterval(createStar, 100);
