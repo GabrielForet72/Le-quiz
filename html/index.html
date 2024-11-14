@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Félicitations !</title>
+
+    <!-- Import de la police stylée depuis Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
+
+    <style>
+        /* Style de base */
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #0d1b2a;
+            overflow: hidden;
+            color: white;
+            font-family: 'Permanent Marker', cursive;
+            text-align: center;
+        }
+
+        /* Titre avec animation de couleur et rebond */
+        h1 {
+            font-size: 4em;
+            animation: colorChange 3s infinite, bounce 2s infinite;
+            text-shadow: 0 0 10px rgba(255,255,255,0.8), 0 0 20px rgba(255,255,255,0.6);
+            margin-bottom: 20px;
+        }
+
+        /* Texte de vanne */
+        .roast-text {
+            font-size: 1.5em;
+            color: #ff69b4;
+            animation: roastTextFlash 2s infinite alternate;
+        }
+
+        /* Effet de changement de couleur et rebond pour le titre */
+        @keyframes colorChange {
+            0% { color: #FFD700; }
+            25% { color: #FF4500; }
+            50% { color: #1E90FF; }
+            75% { color: #32CD32; }
+            100% { color: #FFD700; }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-30px); }
+            60% { transform: translateY(-15px); }
+        }
+
+        /* Animation clignotante pour le texte de vanne */
+        @keyframes roastTextFlash {
+            from { opacity: 0.6; }
+            to { opacity: 1; }
+        }
+
+        /* Feux d'artifice */
+        .firework {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: radial-gradient(circle, white 30%, rgba(255,255,255,0) 70%);
+            border-radius: 50%;
+            animation: explode 1.5s ease-out infinite;
+        }
+
+        @keyframes explode {
+            0% { transform: scale(0); opacity: 1; }
+            50% { transform: scale(2); opacity: 0.6; }
+            100% { transform: scale(4); opacity: 0; }
+        }
+
+        /* Confettis */
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: randomColor();
+            animation: fall 3s linear infinite;
+            opacity: 0.8;
+            border-radius: 50%;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-100vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* Étoiles scintillantes */
+        .star {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background: #FFD700;
+            border-radius: 50%;
+            animation: twinkle 1s infinite alternate;
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0.3; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1.2); }
+        }
+
+    </style>
+</head>
+<body>
+    <div>
+        <h1>Félicitations !</h1>
+        <p class="roast-text">T’as réussi c'est bien ! Tu veux une médaille Callaghan ?</p>
+    </div>
+
+    <script>
+        // Fonction pour créer un feu d'artifice coloré
+        function createFirework() {
+            const firework = document.createElement("div");
+            firework.classList.add("firework");
+            firework.style.background = getRandomColor();
+
+            const x = Math.random() * window.innerWidth;
+            const y = Math.random() * window.innerHeight;
+
+            firework.style.left = `${x}px`;
+            firework.style.top = `${y}px`;
+
+            document.body.appendChild(firework);
+
+            setTimeout(() => {
+                firework.remove();
+            }, 1500);
+        }
+
+        // Fonction pour créer des confettis
+        function createConfetti() {
+            const confetti = document.createElement("div");
+            confetti.classList.add("confetti");
+            confetti.style.left = Math.random() * window.innerWidth + "px";
+            confetti.style.top = "-20px";
+            confetti.style.backgroundColor = getRandomColor();
+
+            document.body.appendChild(confetti);
+
+            setTimeout(() => {
+                confetti.remove();
+            }, 3000);
+        }
+
+        // Fonction pour créer une étoile scintillante
+        function createStar() {
+            const star = document.createElement("div");
+            star.classList.add("star");
+
+            star.style.left = Math.random() * window.innerWidth + "px";
+            star.style.top = Math.random() * window.innerHeight + "px";
+
+            document.body.appendChild(star);
+
+            setTimeout(() => {
+                star.remove();
+            }, 1000);
+        }
+
+        // Génère une couleur aléatoire
+        function getRandomColor() {
+            const colors = ["#FFD700", "#FF4500", "#1E90FF", "#32CD32", "#FF69B4", "#00CED1"];
+            return colors[Math.floor(Math.random() * colors.length)];
+        }
+
+        // Créer des feux d'artifice, confettis et étoiles scintillantes
+        setInterval(createFirework, 300);
+        setInterval(createConfetti, 200);
+        setInterval(createStar, 100);
+    </script>
+</body>
+</html>
+
