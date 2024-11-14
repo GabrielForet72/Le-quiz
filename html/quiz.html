@@ -3,12 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz avec Compte à Rebours</title>
+    <title>Quiz avec Pop-up et Compte à Rebours</title>
+    <style>
+        #popup-container {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
+        #popup-container button {
+            display: block;
+            margin-top: 10px;
+            padding: 8px;
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+    </style>
 </head>
 <body>
     <h1>Bienvenue sur le Quiz</h1>
-    <p>Réponds correctement et dans les temps pour accéder à la page de félicitations !</p>
+    <div id="timer"></div>
+    <div id="result"></div>
+
+    <!-- Pop-up personnalisé -->
+    <div id="popup-container">
+        <p id="popup-question"></p>
+        <div id="popup-options"></div>
+    </div>
 
     <script src="/javascript/script.js"></script>
 </body>
 </html>
+
+
