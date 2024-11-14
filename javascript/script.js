@@ -19,7 +19,7 @@ function startCountdown() {
         if (timeLeft < 0) {
             clearInterval(countdown);
             alert("Temps écoulé ! Le quiz est terminé.");
-            currentQuestion = questions.length; // Termine le quiz
+            currentQuestion = questions.length; 
         }
     }, 1000);
 }
